@@ -311,6 +311,7 @@ class WeiXinRobot(object):
 
     def wx_sync_loop(self):
         self._run(u'[*] 进入信息监听模式... ', self.sync)
+
         while True:
             retcode, selector = self.sync_check(self.sync_host)
             if retcode == '0':
