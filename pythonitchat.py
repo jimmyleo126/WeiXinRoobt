@@ -86,12 +86,48 @@ def tuling_reply_img(msg):
 #
 #     if msg['Type'] == TEXT:
 #         for item in chatrooms:
+k1 = '71f28bf79c820df10d39b4074345ef8c'
+k2 = '1107d5601866433dba9599fac1bc0083'
+def get_response2(msg, kk):
+    apiUrl = 'http://www.tuling123.com/openapi/api'
+    data = {
+        'key' : kk,
+        'info' : msg,
+        'userid' : 'wechat-robot'
+    }
+    try:
+        r = requests.post(apiUrl, data=data).json()
+        return r.get('text')
+    except:
+        return
 
 
-itchat.auto_login(hotReload=True)
-itchat.run(debug=True)
-#itchat.send_msg('kjkjkjkj',u'@281c279c4c977720dde758c4a1eff4356c2634f60383786a98bc73ae22102b24')
-#itchat.send_msg('kjkjkjkj','filehelper')
+
+itchat.auto_login()
+
+chatrooms = itchat.search_chatrooms(name=u'农药联盟')
+chatrooms1 = itchat.search_chatrooms(name='Single Dogs')
+chatrooms2 = itchat.search_chatrooms(name=u'农药联盟')
+UserName = chatrooms2[0]['UserName']
+#itchat.run(debug=True)
+print (u'当前时间：%s')
+tt = u'你好'
+i = 0
+while i < 100:
+    if True:
+        strdate = time.strftime("%Y/%m/%d %H:%M:%S")
+        reply = get_response2(tt,k1)
+        reply1 = get_response2(reply, k2)
+        print (u'当前时间：%s' % strdate)
+        itchat.send(u"机器人1：%s" % reply, UserName)
+        itchat.send(u"机器人2：%s" % reply1, UserName)
+        tt = reply1
+        i = i + 1
+        time.sleep(1)
+    else:
+        pass
+
+
 #users = itchat.search_friends(name=u'Single Dogs')
 
 # print(users[0]['UserName'])
